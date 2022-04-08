@@ -2,7 +2,7 @@
 //
 
 #include "framework.h"
-#include "arcanoidWinVer.h"
+#include "main.h"
 
 #define MAX_LOADSTRING 100
 
