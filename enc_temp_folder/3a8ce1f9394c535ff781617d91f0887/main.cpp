@@ -109,7 +109,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       0, 0, windowRect.right-windowRect.left, windowRect.bottom-windowRect.top, nullptr, nullptr, hInstance, nullptr);
 
-   if (hWnd==0){
+   if (!hWnd)
+   {
       return FALSE;
    }
 
@@ -154,7 +155,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            // 
+            // TODO: Add any drawing code that uses hdc here...
             EndPaint(hWnd, &ps);
         }
         break;
