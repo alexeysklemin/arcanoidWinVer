@@ -120,6 +120,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 }
 
  void drawFrame(HDC hdc) {
+     Rectangle(hdc, 8*3, 6*3, (8+15)*3,(6+7)*3);
 
     }
 //
