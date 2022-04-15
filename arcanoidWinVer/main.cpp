@@ -120,6 +120,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 }
 
  void drawFrame(HDC hdc) {
+     HPEN pen = CreatePen(PS_SOLID, 0, RGB(255, 85, 255));
+     HBRUSH brush = CreateSolidBrush(RGB(255, 85, 255));
+     SelectObject(hdc, pen);
+     SelectObject(hdc, brush);
+
      Rectangle(hdc, 8*3, 6*3, (8+15)*3,(6+7)*3);
 
     }
