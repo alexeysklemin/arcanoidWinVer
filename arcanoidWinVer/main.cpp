@@ -119,6 +119,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    return TRUE;
 }
 
+void drawBrick(HDC hdc) {
+
+}
+
  void drawFrame(HDC hdc) {
      HPEN margenPen = CreatePen(PS_SOLID, 0, RGB(255, 85, 255));
      HBRUSH margenBrush = CreateSolidBrush(RGB(255, 85, 255));
