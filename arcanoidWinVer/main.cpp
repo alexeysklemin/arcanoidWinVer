@@ -119,26 +119,31 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    return TRUE;
 }
 
-void drawBrick(HDC hdc) {
+void drawBrick(HDC hdc, bool colorBric) {
+    if (colorBric) {
+        HPEN margenPen = CreatePen(PS_SOLID, 0, RGB(255, 85, 255));
+        HBRUSH margenBrush = CreateSolidBrush(RGB(255, 85, 255));
+        SelectObject(hdc, margenPen);
+        SelectObject(hdc, margenBrush);
 
+        Rectangle(hdc, 8*3, 6*3, (8+15)*3,(6+7)*3);
+    }
+    else {
+         HPEN bluePen = CreatePen(PS_SOLID, 0, RGB(85, 255, 255));
+         HBRUSH blueBrush = CreateSolidBrush(RGB(85, 255, 255));
+         SelectObject(hdc, bluePen);
+         SelectObject(hdc, blueBrush);
+
+         Rectangle(hdc, 8 * 3, (6+8) * 3, (8 + 15) * 3, (6 + 7+8) * 3);
+    }
+    
 }
 
  void drawFrame(HDC hdc) {
-     HPEN margenPen = CreatePen(PS_SOLID, 0, RGB(255, 85, 255));
-     HBRUSH margenBrush = CreateSolidBrush(RGB(255, 85, 255));
-     SelectObject(hdc, margenPen);
-     SelectObject(hdc, margenBrush);
-
-     Rectangle(hdc, 8*3, 6*3, (8+15)*3,(6+7)*3);
-
-     HPEN bluePen = CreatePen(PS_SOLID, 0, RGB(85, 255, 255));
-     HBRUSH blueBrush = CreateSolidBrush(RGB(85, 255, 255));
-     SelectObject(hdc, bluePen);
-     SelectObject(hdc, blueBrush);
-
-     Rectangle(hdc, 8 * 3, (6+8) * 3, (8 + 15) * 3, (6 + 7+8) * 3);
-
-    }
+     drawBrick(hdc, true);
+     drawBrick(hdc, false);
+    
+  }
 //
 //  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
