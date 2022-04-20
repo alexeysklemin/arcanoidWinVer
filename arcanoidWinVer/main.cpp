@@ -11,6 +11,12 @@ HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 
+
+const int globalScale = 3;
+const int brickWidth = 15;
+const int brickHeigt = 7;
+const int cellWidth = 16;
+const int cellHeigt = 8;
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
@@ -119,29 +125,40 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    return TRUE;
 }
 
-void drawBrick(HDC hdc, bool colorBric) {
-    if (colorBric) {
-        HPEN margenPen = CreatePen(PS_SOLID, 0, RGB(255, 85, 255));
-        HBRUSH margenBrush = CreateSolidBrush(RGB(255, 85, 255));
-        SelectObject(hdc, margenPen);
-        SelectObject(hdc, margenBrush);
+void drawBrick(HDC hdc, int x, int y, bool colorBric) {
 
-        Rectangle(hdc, 8*3, 6*3, (8+15)*3,(6+7)*3);
+    HPEN pen;
+    HBRUSH brush;
+
+    if (colorBric) {
+        pen = CreatePen(PS_SOLID, 0, RGB(255, 85, 255));
+        brush = CreateSolidBrush(RGB(255, 85, 255));
+        
     }
     else {
-         HPEN bluePen = CreatePen(PS_SOLID, 0, RGB(85, 255, 255));
-         HBRUSH blueBrush = CreateSolidBrush(RGB(85, 255, 255));
-         SelectObject(hdc, bluePen);
-         SelectObject(hdc, blueBrush);
-
-         Rectangle(hdc, 8 * 3, (6+8) * 3, (8 + 15) * 3, (6 + 7+8) * 3);
+         pen = CreatePen(PS_SOLID, 0, RGB(85, 255, 255));
+         brush = CreateSolidBrush(RGB(85, 255, 255));
+        
+        
     }
+
+    SelectObject(hdc, pen);
+    SelectObject(hdc, brush);
     
+    Rectangle(hdc, x * globalScale, y * globalScale, (x + brickWidth) * globalScale, (y + brickHeigt) * globalScale);
 }
 
  void drawFrame(HDC hdc) {
-     drawBrick(hdc, true);
-     drawBrick(hdc, false);
+
+     for (int i = 0; i < 14; ++i) {
+         for (int j = 0; j < 12; ++j) {
+
+             drawBrick(hdc, 8 + j * cellWidth, 6 + i*cellHeigt, true);
+             
+
+         }
+     }
+     
     
   }
 //
