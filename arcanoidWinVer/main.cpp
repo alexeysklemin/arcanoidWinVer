@@ -17,6 +17,22 @@ const int brickWidth = 15;
 const int brickHeigt = 7;
 const int cellWidth = 16;
 const int cellHeigt = 8;
+const int levelXOffset = 8;
+const int levelYOffset = 6;
+
+char level01[12][14] = {0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,
+                        1,1,1, 1,1,1, 1,1,1, 1,1,1, 1,1,
+                        1,1,1, 1,1,1, 1,1,1, 1,1,1, 1,1,
+                        2,2,2, 2,2,2, 2,2,2, 2,2,2, 2,2,
+                        2,2,2, 2,2,2, 2,2,2, 2,2,2, 2,2,
+                        1,1,1, 1,1,1, 1,1,1, 1,1,1, 1,1,
+                        1,1,1, 1,1,1, 1,1,1, 1,1,1, 1,1,
+                        2,2,2, 2,2,2, 2,2,2, 2,2,2, 2,2,
+                        2,2,2, 2,2,2, 2,2,2, 2,2,2, 2,2,
+                        0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,
+                        0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,
+                        0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0};
+
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
@@ -125,19 +141,23 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    return TRUE;
 }
 
-void drawBrick(HDC hdc, int x, int y, bool colorBric) {
+void drawBrick(HDC hdc, int x, int y, char colorBric) {
 
     HPEN pen;
     HBRUSH brush;
 
-    if (colorBric) {
+    if (colorBric==2) {
         pen = CreatePen(PS_SOLID, 0, RGB(255, 85, 255));
         brush = CreateSolidBrush(RGB(255, 85, 255));
         
     }
     else {
-         pen = CreatePen(PS_SOLID, 0, RGB(85, 255, 255));
-         brush = CreateSolidBrush(RGB(85, 255, 255));
+        if (colorBric == 1) {
+            pen = CreatePen(PS_SOLID, 0, RGB(85, 255, 255));
+            brush = CreateSolidBrush(RGB(85, 255, 255));
+        }
+        else return;
+         
         
         
     }
@@ -153,7 +173,7 @@ void drawBrick(HDC hdc, int x, int y, bool colorBric) {
      for (int i = 0; i < 14; ++i) {
          for (int j = 0; j < 12; ++j) {
 
-             drawBrick(hdc, 8 + j * cellWidth, 6 + i*cellHeigt, true);
+             drawBrick(hdc, levelXOffset + j * cellWidth, levelYOffset + i*cellHeigt, level01[i][j]);
              
 
          }
