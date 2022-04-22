@@ -146,21 +146,23 @@ void drawBrick(HDC hdc, int x, int y, char colorBric) {
     HPEN pen;
     HBRUSH brush;
 
-    if (colorBric==2) {
+    switch (colorBric){
+
+    case 0:
+        return;
+    case 1:
         pen = CreatePen(PS_SOLID, 0, RGB(255, 85, 255));
         brush = CreateSolidBrush(RGB(255, 85, 255));
-        
+        break;
+    case 2:
+        pen = CreatePen(PS_SOLID, 0, RGB(85, 255, 255));
+        brush = CreateSolidBrush(RGB(85, 255, 255));
+        break;
+    default:
+        return;
     }
-    else {
-        if (colorBric == 1) {
-            pen = CreatePen(PS_SOLID, 0, RGB(85, 255, 255));
-            brush = CreateSolidBrush(RGB(85, 255, 255));
-        }
-        else return;
-         
-        
-        
-    }
+
+    
 
     SelectObject(hdc, pen);
     SelectObject(hdc, brush);
