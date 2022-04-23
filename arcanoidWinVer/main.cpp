@@ -10,7 +10,11 @@
 HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
-
+enum eBrickType {
+    brickNone,
+    brickRed,
+    brickBlue
+};
 
 const int globalScale = 3;
 const int brickWidth = 15;
@@ -19,6 +23,9 @@ const int cellWidth = 16;
 const int cellHeigt = 8;
 const int levelXOffset = 8;
 const int levelYOffset = 6;
+
+HPEN bluePen, redPen;
+HBRUSH blueBrush, redBrush;
 
 char level01[12][14] = {0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,
                         1,1,1, 1,1,1, 1,1,1, 1,1,1, 1,1,
@@ -77,6 +84,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     return (int) msg.wParam;
 }
 
+
+void init() {
+    bluePen = CreatePen(PS_SOLID, 0, RGB(255, 85, 255));
+    blueBrush = CreateSolidBrush(RGB(255, 85, 255));
+    redPen = CreatePen(PS_SOLID, 0, RGB(85, 255, 255));
+    redBrush = CreateSolidBrush(RGB(85, 255, 255));
+}
 
 
 //
@@ -141,22 +155,21 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    return TRUE;
 }
 
-void drawBrick(HDC hdc, int x, int y, char colorBric) {
+void drawBrick(HDC hdc, int x, int y, eBrickType colorBric) {
 
-    HPEN pen;
-    HBRUSH brush;
+   
 
     switch (colorBric){
 
-    case 0:
+    case brickNone:
         return;
-    case 1:
-        pen = CreatePen(PS_SOLID, 0, RGB(255, 85, 255));
-        brush = CreateSolidBrush(RGB(255, 85, 255));
+    case brickRed:
+        bluePen;
+        blueBrush;
         break;
-    case 2:
-        pen = CreatePen(PS_SOLID, 0, RGB(85, 255, 255));
-        brush = CreateSolidBrush(RGB(85, 255, 255));
+    case brickBlue:
+        redPen;
+        redBrush;
         break;
     default:
         return;
@@ -167,19 +180,23 @@ void drawBrick(HDC hdc, int x, int y, char colorBric) {
     SelectObject(hdc, pen);
     SelectObject(hdc, brush);
     
-    Rectangle(hdc, x * globalScale, y * globalScale, (x + brickWidth) * globalScale, (y + brickHeigt) * globalScale);
+    RoundRect(hdc, x * globalScale, y * globalScale, (x + brickWidth) * globalScale, (y + brickHeigt) * globalScale, 2*globalScale, 2 * globalScale);
 }
 
- void drawFrame(HDC hdc) {
-
-     for (int i = 0; i < 14; ++i) {
+void drawLevel1(HDC hdc) {
+    for (int i = 0; i < 14; ++i) {
          for (int j = 0; j < 12; ++j) {
 
-             drawBrick(hdc, levelXOffset + j * cellWidth, levelYOffset + i*cellHeigt, level01[i][j]);
+             drawBrick(hdc, levelXOffset + j * cellWidth, levelYOffset + i*cellHeigt, (eBrickType)level01[i][j]);
              
 
          }
      }
+}
+
+ void drawFrame(HDC hdc) {
+
+     drawLevel1(hdc);
      
     
   }
