@@ -182,7 +182,7 @@ void drawBrick(HDC hdc, int x, int y, eBrickType colorBric) {
         return;
     }
 
-    
+    //
 
     SelectObject(hdc, pen);
     SelectObject(hdc, brush);
