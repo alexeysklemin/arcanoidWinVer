@@ -88,6 +88,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 void init() {
     bluePen = CreatePen(PS_SOLID, 0, RGB(255, 85, 255));
     blueBrush = CreateSolidBrush(RGB(255, 85, 255));
+
     redPen = CreatePen(PS_SOLID, 0, RGB(85, 255, 255));
     redBrush = CreateSolidBrush(RGB(85, 255, 255));
 }
@@ -133,6 +134,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
+   init();
+
    RECT windowRect;
    windowRect.left = 0;
    windowRect.top = 0;
@@ -157,19 +160,23 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 void drawBrick(HDC hdc, int x, int y, eBrickType colorBric) {
 
+     HPEN pen;
+     HBRUSH brush;
+
    
 
     switch (colorBric){
+        
 
     case brickNone:
         return;
     case brickRed:
-        bluePen;
-        blueBrush;
+        pen = bluePen;
+        brush = blueBrush;
         break;
     case brickBlue:
-        redPen;
-        redBrush;
+        pen = redPen;
+        brush = redBrush;
         break;
     default:
         return;
