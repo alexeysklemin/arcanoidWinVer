@@ -16,6 +16,9 @@
     <Filter Include="main">
       <UniqueIdentifier>{f3cf2bb4-6255-4e6a-b3d1-33e5c89e10ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="engine">
+      <UniqueIdentifier>{fe443657-1529-4a12-af31-cbbb25d70eac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -29,6 +32,9 @@
     </ClInclude>
     <ClInclude Include="main.h">
       <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="engine.h">
+      <Filter>engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -47,6 +53,9 @@
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="engine.cpp">
+      <Filter>engine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
