@@ -12,6 +12,9 @@ const int cellWidth = 16;
 const int cellHeigt = 8;
 const int levelXOffset = 8;
 const int levelYOffset = 6;
+const int circlSize = 7;
+
+int innerWidth = 21;
 
 HPEN bluePen, redPen;
 HBRUSH blueBrush, redBrush;
@@ -84,11 +87,28 @@ void drawLevel1(HDC hdc) {
 }
 
 
+void drawPlatform(HDC hdc, int x, int y) {
+
+    
+
+    SelectObject(hdc, redPen);
+    SelectObject(hdc, redBrush);
+
+    Ellipse(hdc, x * globalScale, y * globalScale, (x + circlSize) * globalScale, (y + circlSize) * globalScale);
+    Ellipse(hdc, (x+innerWidth) * globalScale, y * globalScale, (x + circlSize+innerWidth) * globalScale, (y + circlSize) * globalScale);
+
+    SelectObject(hdc, bluePen);
+    SelectObject(hdc, blueBrush);
+
+    RoundRect(hdc, (x + 4) * globalScale, (y + 1) * globalScale, (x + 4 + innerWidth - 1) * globalScale, (y + 1 + 5) * globalScale, 4 * globalScale, 4 * globalScale);
+}
+
+
 
 void drawFrame(HDC hdc) {
 
     drawLevel1(hdc);
-
+    drawPlatform(hdc, 50, 100);
 
 }
 
