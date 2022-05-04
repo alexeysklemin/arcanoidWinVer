@@ -33,13 +33,32 @@ char level01[12][14] = { 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,
                         0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0 };
 
 
+void penBrush(unsigned char r, unsigned char g, unsigned char b, HPEN &pen, HBRUSH &brush) {
+
+    pen = CreatePen(PS_SOLID, 0, RGB(r, g, b));
+    brush = CreateSolidBrush(RGB(r, g, b));
+
+}
+
 void init() {
-    bluePen = CreatePen(PS_SOLID, 0, RGB(255, 85, 255));
+    
+
+    /*redPen = CreatePen(PS_SOLID, 0, RGB(85, 255, 255));
+    redBrush = CreateSolidBrush(RGB(85, 255, 255));*/
+   penBrush(255, 85, 255, redPen, redBrush);
+
+    penBrush(85, 255, 255, bluePen, blueBrush);
+
+   /* bluePen = CreatePen(PS_SOLID, 0, RGB(255, 85, 255));
     blueBrush = CreateSolidBrush(RGB(255, 85, 255));
 
     redPen = CreatePen(PS_SOLID, 0, RGB(85, 255, 255));
-    redBrush = CreateSolidBrush(RGB(85, 255, 255));
-}
+    redBrush = CreateSolidBrush(RGB(85, 255, 255));*/
+
+    penBrush(255, 85, 255, redPen, redBrush);
+
+    penBrush(85, 255, 255, bluePen, blueBrush);
+    }
 
 
 void drawBrick(HDC hdc, int x, int y, eBrickType colorBric) {
