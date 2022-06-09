@@ -16,7 +16,7 @@ const int circlSize = 7;
 
 int innerWidth = 21;
 
-HPEN bluePen, redPen;
+HPEN highlightPen, bluePen, redPen;
 HBRUSH blueBrush, redBrush;
 
 char level01[12][14] = { 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,
@@ -42,12 +42,12 @@ void penBrush(unsigned char r, unsigned char g, unsigned char b, HPEN &pen, HBRU
 
 void init() {
     
+    highlightPen = CreatePen(PS_SOLID, 0, RGB(255,255,255));
 
-    /*redPen = CreatePen(PS_SOLID, 0, RGB(85, 255, 255));
-    redBrush = CreateSolidBrush(RGB(85, 255, 255));*/
+
    penBrush(255, 85, 255, redPen, redBrush);
 
-    penBrush(85, 255, 255, bluePen, blueBrush);
+   penBrush(85, 255, 255, bluePen, blueBrush);
 
    /* bluePen = CreatePen(PS_SOLID, 0, RGB(255, 85, 255));
     blueBrush = CreateSolidBrush(RGB(255, 85, 255));
@@ -115,6 +115,9 @@ void drawPlatform(HDC hdc, int x, int y) {
 
     Ellipse(hdc, x * globalScale, y * globalScale, (x + circlSize) * globalScale, (y + circlSize) * globalScale);
     Ellipse(hdc, (x+innerWidth) * globalScale, y * globalScale, (x + circlSize+innerWidth) * globalScale, (y + circlSize) * globalScale);
+
+    SelectObject(hdc, highlightPen);
+    Arc(hdc, (x+1)*globalScale, (y+1)*globalScale, (x+circlSize-1)*globalScale, (y+circlSize-1)*globalScale, (x+1+1)*globalScale, (y+1)*globalScale, (x+1)*globalScale, (y+1+2)*globalScale);
 
     SelectObject(hdc, bluePen);
     SelectObject(hdc, blueBrush);
