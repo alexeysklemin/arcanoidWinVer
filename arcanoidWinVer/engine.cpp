@@ -117,15 +117,19 @@ void drawPlatform(HDC hdc, int x, int y) {
     Ellipse(hdc, (x+innerWidth) * globalScale, y * globalScale, (x + circlSize+innerWidth) * globalScale, (y + circlSize) * globalScale);
 
     SelectObject(hdc, highlightPen);
+   
     Arc(hdc, (x+1)*globalScale, (y+1)*globalScale, (x+circlSize-1)*globalScale, (y+circlSize-1)*globalScale, (x+1+1)*globalScale, (y+1)*globalScale, (x+1)*globalScale, (y+1+2)*globalScale);
-
+    Arc(hdc, (x + 4 + innerWidth - 1) * globalScale, (y + 1 + 5) * globalScale, (x + 4 +innerWidth+circlSize - 1) * globalScale, (y +1+ 5) * globalScale, (x + 1 + 4 + innerWidth + circlSize - 1) * globalScale, (y + 1 + 4 + innerWidth + circlSize - 1) * globalScale, (x + 1) * globalScale, (y + 4 + innerWidth + circlSize - 1 + 2) * globalScale);
     SelectObject(hdc, bluePen);
     SelectObject(hdc, blueBrush);
 
     RoundRect(hdc, (x + 4) * globalScale, (y + 1) * globalScale, (x + 4 + innerWidth - 1) * globalScale, (y + 1 + 5) * globalScale, 4 * globalScale, 4 * globalScale);
+    SelectObject(hdc, highlightPen);
+    SelectObject(hdc, redBrush);
+    Rectangle(hdc, (x + 6) * globalScale, (y + 2) * globalScale, (x + innerWidth) * globalScale, (y + 4) * globalScale);
+   
 }
-
-
+..
 
 void drawFrame(HDC hdc) {
 
