@@ -129,7 +129,7 @@ void drawPlatform(HDC hdc, int x, int y) {
     Rectangle(hdc, (x + 6) * globalScale, (y + 2) * globalScale, (x + innerWidth) * globalScale, (y + 4) * globalScale);
    
 }
-//
+
 
 void drawFrame(HDC hdc) {
 
