@@ -17,7 +17,7 @@ const int circlSize = 7;
 int innerWidth = 21;
 
 HPEN highlightPen, bluePen, redPen;
-HBRUSH blueBrush, redBrush;
+HBRUSH blueBrush, redBrush, highlightBrush;
 
 char level01[12][14] = { 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,
                         1,1,1, 1,1,1, 1,1,1, 1,1,1, 1,1,
@@ -43,6 +43,7 @@ void penBrush(unsigned char r, unsigned char g, unsigned char b, HPEN &pen, HBRU
 void init() {
     
     highlightPen = CreatePen(PS_SOLID, 0, RGB(255,255,255));
+    highlightBrush = CreateSolidBrush(RGB(255, 255, 255));
 
 
    penBrush(255, 85, 255, redPen, redBrush);
@@ -125,8 +126,9 @@ void drawPlatform(HDC hdc, int x, int y) {
 
     RoundRect(hdc, (x + 4) * globalScale, (y + 1) * globalScale, (x + 4 + innerWidth - 1) * globalScale, (y + 1 + 5) * globalScale, 4 * globalScale, 4 * globalScale);
     SelectObject(hdc, highlightPen);
-    SelectObject(hdc, redBrush);
+    SelectObject(hdc, highlightBrush);
     Rectangle(hdc, (x + 6) * globalScale, (y + 2) * globalScale, (x + innerWidth) * globalScale, (y + 4) * globalScale);
+    SetPixel(hdc, ((x + innerWidth) * globalScale)+2), ((y * globalScale)+2), (RGB(255,255,255));
    
 }
 
