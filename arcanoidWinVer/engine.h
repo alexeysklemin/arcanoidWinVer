@@ -11,4 +11,4 @@ enum EKeyType {
 void init();
 void drawFrame(HDC hdc);
 
-int onKeyDown(EKeyTab keyType);
+int onKeyDown(EKeyType keyType);
