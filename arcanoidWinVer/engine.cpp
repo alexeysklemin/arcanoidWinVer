@@ -1,4 +1,5 @@
 #include "engine.h"
+
 enum eBrickType {
     brickNone,
     brickRed,
@@ -142,4 +143,15 @@ void drawFrame(HDC hdc) {
 
 }
 
+int onKeyDown(EKeyType keyType) {
 
+    switch (keyType){
+    case EKTLeft:
+        break;
+    case EKTRight:
+        break;
+    case EKTSpace:
+        break;
+
+    }
+}
