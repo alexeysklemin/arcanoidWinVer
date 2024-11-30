@@ -170,13 +170,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         return DefWindowProc(hWnd, message, wParam, lParam);
     case WM_KEYDOWN:
         switch (wParam) {
-        VK_LEFT:
+        case VK_LEFT:
           return onKeyDown(EKTLeft);
             break;
-        VK_RIGHT:
+        case VK_RIGHT:
             return onKeyDown(EKTRight);
             break;
-        VK_SPACE:
+        case VK_SPACE:
             return onKeyDown(EKTSpace);
             break;
         }
