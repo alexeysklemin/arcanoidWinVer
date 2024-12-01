@@ -98,7 +98,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-   init();
+  
 
    RECT windowRect;
    windowRect.left = 0;
@@ -115,6 +115,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    if (hWnd==0){
       return FALSE;
    }
+   init(hWnd);
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);

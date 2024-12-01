@@ -8,7 +8,7 @@ enum EKeyType {
 	EKTSpace
 };
 
-void init();
+void init(HWND hWnd);
 void drawFrame(HDC hdc);
 
 int onKeyDown(EKeyType keyType);

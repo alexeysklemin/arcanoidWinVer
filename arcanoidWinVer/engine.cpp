@@ -14,11 +14,18 @@ const int cellHeigt = 8;
 const int levelXOffset = 8;
 const int levelYOffset = 6;
 const int circlSize = 7;
+const int PlatformYPos = 185;
+const int platformHight = circlSize;
 
 int innerWidth = 21;
+int PlatformXPos = 100;
+int PlatformXStep=globalScale;
+int platformWidth = innerWidth + circlSize;
+
 
 HPEN highlightPen, bluePen, redPen;
 HBRUSH blueBrush, redBrush, highlightBrush;
+HWND hWnd;
 
 char level01[12][14] = { 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,
                         1,1,1, 1,1,1, 1,1,1, 1,1,1, 1,1,
@@ -41,7 +48,7 @@ void penBrush(unsigned char r, unsigned char g, unsigned char b, HPEN &pen, HBRU
 
 }
 
-void init() {
+void init(HWND hWnd) {
     
     highlightPen = CreatePen(PS_SOLID, 0, RGB(255,255,255));
     highlightBrush = CreateSolidBrush(RGB(255, 255, 255));
@@ -143,15 +150,31 @@ void drawFrame(HDC hdc) {
 
 }
 
+void redrawPlatform() {
+    RECT platformRect;
+
+    platformRect.left = PlatformXPos * globalScale;
+    platformRect.top = PlatformYPos * globalScale;
+    platformRect.right = platformRect.left + platformWidth * globalScale;
+    platformRect.bottom = platformRect.top + platformHight * globalScale;
+
+
+    InvalidateRect(hWnd, &platformRect, FALSE);
+}
+
 int onKeyDown(EKeyType keyType) {
 
     switch (keyType){
     case EKTLeft:
+        PlatformXPos -= PlatformXStep;
+        redrawPlatform();
         break;
     case EKTRight:
+        PlatformXPos += PlatformXStep;
+        redrawPlatform();
         break;
     case EKTSpace:
         break;
-
+        return 0;
     }
 }
