@@ -14,18 +14,19 @@ const int cellHeigt = 8;
 const int levelXOffset = 8;
 const int levelYOffset = 6;
 const int circlSize = 7;
-const int PlatformYPos = 185;
+const int platformYPos = 185;
 const int platformHight = circlSize;
 
 int innerWidth = 21;
-int PlatformXPos = 100;
-int PlatformXStep=globalScale;
+int platformXPos = 100;
+int platformXStep=globalScale;
 int platformWidth = innerWidth + circlSize;
 
 
 HPEN highlightPen, bluePen, redPen;
 HBRUSH blueBrush, redBrush, highlightBrush;
 HWND hWnd;
+RECT platformRect, prevPlatformRect;
 
 char level01[12][14] = { 0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,
                         1,1,1, 1,1,1, 1,1,1, 1,1,1, 1,1,
@@ -145,20 +146,23 @@ void drawPlatform(HDC hdc, int x, int y) {
 
 void drawFrame(HDC hdc) {
 
-    drawLevel1(hdc);
-    drawPlatform(hdc, 50, 100);
+  //  drawLevel1(hdc);
+    drawPlatform(hdc, platformXPos, platformYPos);
 
 }
 
 void redrawPlatform() {
-    RECT platformRect;
+   
 
-    platformRect.left = PlatformXPos * globalScale;
-    platformRect.top = PlatformYPos * globalScale;
+    prevPlatformRect = platformRect;
+
+    platformRect.left = (levelXOffset + platformXPos) * globalScale;
+    platformRect.top = platformYPos * globalScale;
     platformRect.right = platformRect.left + platformWidth * globalScale;
     platformRect.bottom = platformRect.top + platformHight * globalScale;
 
 
+    InvalidateRect(hWnd, &prevPlatformRect, FALSE);
     InvalidateRect(hWnd, &platformRect, FALSE);
 }
 
@@ -166,11 +170,11 @@ int onKeyDown(EKeyType keyType) {
 
     switch (keyType){
     case EKTLeft:
-        PlatformXPos -= PlatformXStep;
+        platformXPos -= platformXStep;
         redrawPlatform();
         break;
     case EKTRight:
-        PlatformXPos += PlatformXStep;
+        platformXPos += platformXStep;
         redrawPlatform();
         break;
     case EKTSpace:
